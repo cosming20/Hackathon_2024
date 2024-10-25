@@ -1,3 +1,4 @@
+<body>
 <div class="matrix-form">
   <h2>Create a New Matrix</h2>
 
@@ -47,7 +48,7 @@
     </div>
   </div>
 
-  <div class="matrix-container" *ngIf="matrix.length">
+  <!-- <div class="matrix-container" *ngIf="matrix.length">
     <div class="matrix">
       <div *ngFor="let row of matrix; let y = index" class="matrix-row">
         <div
@@ -56,6 +57,40 @@
           [ngClass]="{
             start: cell.isStart,
             finish: cell.isFinish
+          }"
+          (click)="setPosition(x, y)"
+        ></div>
+      </div>
+    </div>
+  </div> -->
+
+  <div *ngIf="!isSolved" class="matrix-container">
+    <div class="matrix">
+      <div *ngFor="let row of matrix; let y = index" class="matrix-row">
+        <div
+          *ngFor="let cell of row; let x = index"
+          class="matrix-cell"
+          [ngClass]="{
+            'start': cell.isStart,
+            'finish': cell.isFinish
+          }"
+          (click)="setPosition(x, y)"
+        ></div>
+      </div>
+    </div>
+  </div>
+  
+  <div *ngIf="isSolved" class="matrix-container">
+    <div class="matrix">
+      <div *ngFor="let row of mazeData; let y = index" class="matrix-row">
+        <div
+          *ngFor="let cell of row; let x = index"
+          class="matrix-cell"
+          [ngClass]="{
+            start: cell === 2,
+            finish: cell == 3,
+            brick: cell === 1,
+            path: cell === 4,
           }"
           (click)="setPosition(x, y)"
         ></div>
@@ -86,3 +121,5 @@
     Solve
   </button>
 </div>
+  
+</body>

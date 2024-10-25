@@ -1,0 +1,71 @@
+[33mcommit 597c628e8247816413bbccce5fa134dfbae89624[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: flaviusp23 <flavius.paltin@yahoo.com>
+Date:   Fri Oct 25 20:26:09 2024 +0300
+
+    maze fix
+
+[33mcommit 285fe9ddc7ccee607af3abdf5b4815cfcd39a6c0[m
+Author: flaviusp23 <flavius.paltin@yahoo.com>
+Date:   Fri Oct 25 19:35:11 2024 +0300
+
+    bug fix
+
+[33mcommit 2a7ff1d2da431168537949ec77ccd9f514c6addf[m
+Author: Cosmin Gagea <cosmin_ionut_gagea@gmail.com>
+Date:   Fri Oct 25 18:59:19 2024 +0300
+
+    working maze display
+
+[33mcommit f98ef576ba82fe6db55e181ecfe3004b16561a66[m
+Author: Cosmin Gagea <cosmin_ionut_gagea@gmail.com>
+Date:   Fri Oct 25 18:30:30 2024 +0300
+
+    linked scripts
+
+[33mcommit 48c9b38da2c8cbdd666f11e186b78920a60f5cba[m
+Author: flaviusp23 <flavius.paltin@yahoo.com>
+Date:   Fri Oct 25 16:32:12 2024 +0300
+
+    homepage + scripts
+
+[33mcommit 0451fecbf43cd120f7d8321d984cdebbd2ade215[m
+Author: flaviusp23 <flavius.paltin@yahoo.com>
+Date:   Fri Oct 25 16:26:05 2024 +0300
+
+    homepage
+
+[33mcommit 562351ef8bd65790d41e6759dbefa83e632adcf4[m
+Author: flaviusp23 <flavius.paltin@yahoo.com>
+Date:   Fri Oct 25 15:19:49 2024 +0300
+
+    frontend auth
+
+[33mcommit e35f201b5b7111a1569be43c157abf1b713d256f[m
+Author: flaviusp23 <flavius.paltin@yahoo.com>
+Date:   Fri Oct 25 12:59:23 2024 +0300
+
+    get maze
+
+[33mcommit f42234776a9ecaf3b8c2a13ec52381d187b2c372[m
+Author: flaviusp23 <flavius.paltin@yahoo.com>
+Date:   Fri Oct 25 12:39:55 2024 +0300
+
+    create maze
+
+[33mcommit 0778b203e39ff343d67e3283fd7308d8843be210[m
+Author: flaviusp23 <flavius.paltin@yahoo.com>
+Date:   Fri Oct 25 11:56:15 2024 +0300
+
+    auth
+
+[33mcommit b3042aea29d2a1b0114c2f1ee64f21b2a96dca45[m
+Author: flaviusp23 <flavius.paltin@yahoo.com>
+Date:   Fri Oct 25 10:49:29 2024 +0300
+
+    setup backend
+
+[33mcommit 9fe21366e49b9726c6034260e7e660c8d74637f9[m
+Author: flaviusp23 <flavius.paltin@yahoo.com>
+Date:   Fri Oct 25 10:48:16 2024 +0300
+
+    first commit

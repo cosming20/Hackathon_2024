@@ -14,7 +14,12 @@ export class HomepageComponent {
   matrix: Array<Array<{ isStart?: boolean; isFinish?: boolean }>> = [];
   startPosition: { x: number; y: number } | null = null;
   finishPosition: { x: number; y: number } | null = null;
-
+  mazeData: number[][] = [];
+  startX: number = 0;
+  startY: number = 0;
+  finishX: number = 0;
+  finishY: number = 0;
+  isSolved: boolean = false;
   constructor(private appService: AppService) {}
 
   createMatrix() {
@@ -67,6 +72,9 @@ export class HomepageComponent {
       this.appService.createMaze(requestBody).pipe(first()).subscribe({
         next: (response) => {
           console.log('Maze created successfully!', response);
+          this.mazeData = response.maze.matrix;
+          this.isSolved = true;
+          console.log(this.mazeData)
           // Handle the success response, e.g., display or process the solution
         },
         error: (errorResponse) => {

@@ -37,4 +37,4 @@ def find_shortest_path(lab, start, stop):
                     visited.add((nx, ny))
                     previous_cell[(nx,ny)] = (x, y)
 
-    return None
+    return lab

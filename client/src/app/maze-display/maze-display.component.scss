@@ -6,24 +6,29 @@
     width: 20px;
     height: 20px;
     border: 1px solid #ccc;
+    background-image: url('/assets/images/cell.png');
   }
   
   .maze-table .start {
-    // background-image: url('/assets/images/green-dot.png');
-    background-color: green;
+    background-image: url('/assets/images/start.png');
+    // background-color: green;
     background-size: cover;
   }
   
   .maze-table .finish {
-    // background-image: url('/assets/images/red-dot.png');
-    background-color: red;
+    background-image: url('/assets/images/finish.png');
+    // background-color: red;
     background-size: cover;
   }
   
   .maze-table .brick {
+    background-image: url('/assets/images/brick.png');
     background-color: #333;
+    background-size: cover;
   }
   .maze-table .path {
-    background-color: aqua;
+    background-image: url('/assets/images/path.png');
+    // background-color: aqua;
+    background-size: cover;
   }
   

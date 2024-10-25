@@ -57,13 +57,30 @@
             border: 1px solid #ccc;
             cursor: pointer;
             transition: background-color 0.3s;
+            background-image: url('/assets/images/cell.png');
+            background-size: cover;
   
             &.start {
-              background-color: #28a745;
+              // background-image: "https://cdn0.iconfinder.com/data/icons/minecraft-2/64/block_minecraft_gaming_gamer_games-1024.png";
+              // background-color: #28a745;
+              background-image: url('/assets/images/start.png');
+              background-size: cover;
+            }
+            &.path {
+              background-color: aqua;
+              background-image: url('/assets/images/path.png');
+              background-size: cover;
+            }
+            &.brick {
+              background-color: gray;
+              background-image: url('/assets/images/brick.png');
+              background-size: cover;
             }
   
             &.finish {
               background-color: #dc3545;
+              background-image: url('/assets/images/finish.png');
+              background-size: cover;
             }
   
             &:hover {
@@ -101,3 +118,4 @@
       }
     }
   }
+  
