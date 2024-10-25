@@ -76,6 +76,17 @@ const uploadImage = async (req, res) => {
   res.status(StatusCodes.OK).json({ image: `/uploads/${productImage.name}` });
 };
 
+const products = require("../mockData/products.json")
+
+const import_data_by_json = () => {
+  products.forEach(element => {
+    element['genre'] = element['genre'].split("|")
+    console.log(element);
+    Product.create(element);
+  });
+}
+
+
 module.exports = {
   createProduct,
   getAllProducts,
