@@ -14,13 +14,13 @@ const createMaze = async (req, res) => {
     bricks,
   } = req.body;
   if (
-    !start_x ||
-    !start_y ||
-    !finish_x ||
-    !finish_y ||
-    !dimension_x ||
-    !dimension_y ||
-    !bricks
+    start_x === undefined ||
+    start_y === undefined ||
+    finish_x === undefined ||
+    finish_y === undefined ||
+    dimension_x === undefined ||
+    dimension_y === undefined ||
+    bricks === undefined
   ) {
     throw new CustomError.BadRequestError("Please provide all values");
   }
@@ -42,8 +42,17 @@ const createMaze = async (req, res) => {
   //   dimension_x,
   //   dimension_y,
   //   bricks] );
-  const path = require('path');
-  const python = spawn("python3", [path.resolve(__dirname, "../../scripts/app.py"), start_x, start_y, finish_x, finish_y, dimension_x, dimension_y, bricks]);    
+  const path = require("path");
+  const python = spawn("python3", [
+    path.resolve(__dirname, "../../scripts/app.py"),
+    start_x,
+    start_y,
+    finish_x,
+    finish_y,
+    dimension_x,
+    dimension_y,
+    bricks,
+  ]);
   let matrix = "";
   python.stdout.on("data", (data) => {
     matrix += data.toString();
@@ -54,9 +63,11 @@ const createMaze = async (req, res) => {
   });
   python.on("close", async (code) => {
     if (code !== 0) {
-      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: "Failed to generate maze matrix" });
+      return res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ error: "Failed to generate maze matrix" });
     }
-    console.log(matrix)
+    console.log(matrix);
     try {
       const parsedMatrix = JSON.parse(matrix);
       const mazeObject = {
@@ -73,7 +84,9 @@ const createMaze = async (req, res) => {
       const maze = await Maze.create(mazeObject);
       res.status(StatusCodes.CREATED).json({ maze });
     } catch (error) {
-      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: "Failed to parse matrix data" });
+      res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ error: "Failed to parse matrix data" });
     }
   });
   // add here mazeObject.matrix

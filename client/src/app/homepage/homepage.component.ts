@@ -55,10 +55,10 @@ export class HomepageComponent {
       const requestBody = {
         dimension_x: this.dimensionX,
         dimension_y: this.dimensionY,
-        start_x: this.startPosition.x + 1, // Adjusting for 1-based index
-        start_y: this.startPosition.y + 1,
-        finish_x: this.finishPosition.x + 1,
-        finish_y: this.finishPosition.y + 1,
+        start_x: this.startPosition.x , // Adjusting for 1-based index
+        start_y: this.startPosition.y ,
+        finish_x: this.finishPosition.x ,
+        finish_y: this.finishPosition.y ,
         bricks: this.brickPercentage
       };
 
