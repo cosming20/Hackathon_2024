@@ -19,27 +19,29 @@ export class HomepageComponent {
 
   createMatrix() {
     if (this.dimensionX && this.dimensionY) {
-      this.matrix = Array.from({ length: this.dimensionY }, () =>
-        Array.from({ length: this.dimensionX }, () => ({}))
+      this.matrix = Array.from({ length: this.dimensionX }, () =>
+        Array.from({ length: this.dimensionY }, () => ({}))
       );
       this.startPosition = null;
       this.finishPosition = null;
     }
   }
+  
 
   setPosition(x: number, y: number) {
     if (!this.startPosition) {
-      this.startPosition = { x, y };
-      this.matrix[y][x].isStart = true; // Set start position
+      this.startPosition = { x, y }; // (y, x) if x is rows and y is columns
+      this.matrix[y][x].isStart = true; // Set start position at (y, x)
     } else if (!this.finishPosition) {
-      this.finishPosition = { x, y };
-      this.matrix[y][x].isFinish = true; // Set finish position
+      this.finishPosition = { x, y }; // (y, x)
+      this.matrix[y][x].isFinish = true; // Set finish position at (y, x)
     } else {
       // Reset positions if both are set
       this.resetPositions();
       this.setPosition(x, y); // Set the new start position
     }
   }
+  
 
   resetPositions() {
     this.matrix.forEach(row => row.forEach(cell => {
@@ -53,15 +55,15 @@ export class HomepageComponent {
   solveMaze() {
     if (this.startPosition && this.finishPosition) {
       const requestBody = {
-        dimension_x: this.dimensionX,
-        dimension_y: this.dimensionY,
-        start_x: this.startPosition.x , // Adjusting for 1-based index
-        start_y: this.startPosition.y ,
-        finish_x: this.finishPosition.x ,
-        finish_y: this.finishPosition.y ,
+        dimension_x: this.dimensionX, // Now represents rows
+        dimension_y: this.dimensionY, // Now represents columns
+        start_x: this.startPosition.y, // Adjusted for row (y)
+        start_y: this.startPosition.x, // Adjusted for column (x)
+        finish_x: this.finishPosition.y, // Adjusted for row (y)
+        finish_y: this.finishPosition.x, // Adjusted for column (x)
         bricks: this.brickPercentage
       };
-
+  
       this.appService.createMaze(requestBody).pipe(first()).subscribe({
         next: (response) => {
           console.log('Maze created successfully!', response);
@@ -79,4 +81,5 @@ export class HomepageComponent {
       });
     }
   }
+  
 }

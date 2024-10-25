@@ -65,10 +65,10 @@
 
   <div class="info">
     <p *ngIf="startPosition">
-      Start Position: ({{ startPosition.x }},{{ startPosition.y }})
+      Start Position: ({{ startPosition.y + 1 }},{{ startPosition.x + 1 }})
     </p>
     <p *ngIf="finishPosition">
-      Finish Position: ({{ finishPosition.x }},{{ finishPosition.y }})
+      Finish Position: ({{ finishPosition.y + 1 }},{{ finishPosition.x + 1 }})
     </p>
   </div>
 
