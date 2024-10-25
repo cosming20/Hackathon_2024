@@ -20,5 +20,5 @@ def generate_lab(x_start, y_start, x_finish, y_finish, x, y, brick):
             lab[rand_x][rand_y] = 1
             bricks_num -= 1
 
-    return lab
+    return lab.tolist()
     

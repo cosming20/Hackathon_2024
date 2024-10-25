@@ -1,0 +1,24 @@
+.maze-table {
+    border-collapse: collapse;
+  }
+  
+  .maze-table td {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #ccc;
+  }
+  
+  .maze-table .start {
+    background-image: url('/assets/images/green-dot.png');
+    background-size: cover;
+  }
+  
+  .maze-table .finish {
+    background-image: url('/assets/images/red-dot.png');
+    background-size: cover;
+  }
+  
+  .maze-table .brick {
+    background-color: #333;
+  }
+  

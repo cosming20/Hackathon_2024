@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { TopNavbarComponent } from './top-navbar/top-navbar.component';
+import { MazeDisplayComponent } from './maze-display/maze-display.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { TopNavbarComponent } from './top-navbar/top-navbar.component';
     LoginComponent,
     RegisterComponent,
     HomepageComponent,
-    TopNavbarComponent
+    TopNavbarComponent,
+    MazeDisplayComponent
   ],
   imports: [
     BrowserModule,

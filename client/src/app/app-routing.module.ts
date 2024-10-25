@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { RegisterComponent } from './register/register.component';
 import { RouterModule, Routes } from '@angular/router';
+import { MazeDisplayComponent } from './maze-display/maze-display.component';
 
 
 
@@ -12,6 +13,7 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent
   },
+  { path: 'maze-display', component: MazeDisplayComponent },
   {
     path: 'homepage',
     component: HomepageComponent,

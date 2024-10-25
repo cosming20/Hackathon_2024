@@ -22,5 +22,8 @@ export class AppService {
   createMaze(body: { dimension_x: number; dimension_y: number; start_x: number; start_y: number; finish_x: number; finish_y: number; bricks: number }): Observable<any> {
     return this.http.post('http://localhost:5000/api/v1/maze', body, { withCredentials: true });
   }
+  getMaze(mazeId: string): Observable<any> {
+    return this.http.get(`http://localhost:5000/api/v1/maze/${mazeId}`, { withCredentials: true });
+  }
   
 }

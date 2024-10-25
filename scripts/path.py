@@ -17,13 +17,15 @@ def find_shortest_path(lab, start, stop):
             path = []
             while previous_cell[(x, y)] is not None:
                 path.append((x, y))
+                lab[x][y] = 4
                 # if (x, y) in previous_cell.keys() and previous_cell[(x, y)] is not None:
                 x, y = previous_cell[(x, y)]
 
             path.append((start[0], start[1]))
 
             path.reverse()  
-            return dist, path
+            # return dist, path
+            return lab
         
         for dx, dy in dir:
             nx = dx + x
