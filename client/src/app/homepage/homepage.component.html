@@ -1,1 +1,88 @@
-<p>homepage works!</p>
+<div class="matrix-form">
+  <h2>Create a New Matrix</h2>
+
+  <div class="input-group">
+    <label for="dimension_x">Dimension X:</label>
+    <input
+      type="number"
+      id="dimension_x"
+      [(ngModel)]="dimensionX"
+      (ngModelChange)="createMatrix()"
+      min="1"
+      required
+    />
+    <div *ngIf="dimensionX < 1" class="error-message">
+      Dimension X must be at least 1.
+    </div>
+
+    <label for="dimension_y">Dimension Y:</label>
+    <input
+      type="number"
+      id="dimension_y"
+      [(ngModel)]="dimensionY"
+      (ngModelChange)="createMatrix()"
+      min="1"
+      required
+    />
+    <div *ngIf="dimensionY < 1" class="error-message">
+      Dimension Y must be at least 1.
+    </div>
+  </div>
+
+  <div class="input-group">
+    <label for="brick_percentage">Brick Percentage:</label>
+    <input
+      type="number"
+      id="brick_percentage"
+      [(ngModel)]="brickPercentage"
+      min="0"
+      max="40"
+      required
+    />
+    <div *ngIf="brickPercentage > 40" class="error-message">
+      Brick Percentage cannot exceed 40%.
+    </div>
+    <div *ngIf="brickPercentage < 0" class="error-message">
+      Brick Percentage cannot be negative.
+    </div>
+  </div>
+
+  <div class="matrix-container" *ngIf="matrix.length">
+    <div class="matrix">
+      <div *ngFor="let row of matrix; let y = index" class="matrix-row">
+        <div
+          *ngFor="let cell of row; let x = index"
+          class="matrix-cell"
+          [ngClass]="{
+            start: cell.isStart,
+            finish: cell.isFinish
+          }"
+          (click)="setPosition(x, y)"
+        ></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info">
+    <p *ngIf="startPosition">
+      Start Position: ({{ startPosition.x }},{{ startPosition.y }})
+    </p>
+    <p *ngIf="finishPosition">
+      Finish Position: ({{ finishPosition.x }},{{ finishPosition.y }})
+    </p>
+  </div>
+
+  <button
+    (click)="solveMaze()"
+    [disabled]="
+      !startPosition ||
+      !finishPosition ||
+      dimensionX < 1 ||
+      dimensionY < 1 ||
+      brickPercentage < 0 ||
+      brickPercentage > 40
+    "
+  >
+    Solve
+  </button>
+</div>
