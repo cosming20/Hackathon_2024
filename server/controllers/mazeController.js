@@ -38,13 +38,29 @@ const createMaze = async (req, res) => {
   res.status(StatusCodes.CREATED).json({ maze });
 };
 const getSingleMaze = async (req, res) => {
-  res.send("get single maze");
+  const mazeId = req.params.id;
+  const maze = await Maze.findOne({ _id: mazeId });
+  if (!maze) {
+    throw new CustomError.NotFoundError(`No maze found with id ${mazeId}`);
+  }
+  res.status(StatusCodes.OK).json({ maze });
 };
 const getAllMazeByCurrentUser = async (req, res) => {
-  res.send("get maze by current");
+  console.log(req.user.id);
+  const mazes = await Maze.find({ user: req.user.id });
+  if (!mazes) {
+    throw new CustomError.NotFoundError(
+      `No mazes found for user ${req.user.username}`
+    );
+  }
+  res.status(StatusCodes.OK).json({ mazes, count: mazes.length });
 };
 const getAllMaze = async (req, res) => {
-  res.send("get all maze");
+  const mazes = await Maze.find();
+  if (!mazes) {
+    throw new CustomError.NotFoundError(`No mazes found`);
+  }
+  res.status(StatusCodes.OK).json({ mazes, count: mazes.length });
 };
 module.exports = {
   createMaze,
