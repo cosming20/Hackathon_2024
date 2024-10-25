@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="login-card">
+    <div>Create a new account</div>
+    <br />
+    <span>
+      Username:
+      <input
+        class="input"
+        type="text"
+        placeholder=""
+        data-placeholder="Enter your username"
+        [(ngModel)]="username"
+        required
+      />
+    </span>
+    <br />
+    <span>
+      Password:
+      <input
+        class="input"
+        type="password"
+        placeholder=""
+        data-placeholder="Enter your password"
+        [(ngModel)]="password"
+        required
+      />
+    </span>
+    <br />
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+    <button class="sign-in-btn" (click)="registerUser()">Create</button>
+    <div class="go-back">
+      <b routerLink="/login">Already have an account?</b>
+    </div>
+  </div>
+</div>

@@ -4,6 +4,7 @@ require("express-async-errors");
 
 const express = require("express");
 const app = express();
+const cors = require("cors");
 // rest of the packages
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
@@ -21,7 +22,11 @@ const errorHandlerMiddleware = require("./middleware/error-handler");
 app.set("trust proxy", 1);
 app.use(express.json());
 app.use(cookieParser(process.env.JWT_SECRET));
-
+const corsOptions = {
+  origin: "http://localhost:4200", // Allow requests from this origin
+  credentials: true, // Allow cookies to be sent with requests
+};
+app.use(cors(corsOptions));
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/maze", mazeRouter);
 

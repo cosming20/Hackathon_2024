@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="login-card">
+    <h1>Welcome to Maze Solver</h1>
+    <div>Sign in to your account</div>
+    <br />
+    <span
+      >Username:
+      <input
+        class="input"
+        type="text"
+        placeholder=""
+        data-placeholder="Enter your username"
+        [(ngModel)]="username"
+        required
+    /></span>
+    <br />
+    <span>
+      Password:
+      <input
+        class="input"
+        type="password"
+        placeholder=""
+        data-placeholder="password"
+        [(ngModel)]="password"
+        required
+      />
+    </span>
+    <br />
+    <button class="sign-in-btn" (click)="signIn()" [disabled]="loading">
+      Sign in
+    </button>
+    <div class="go-back">
+      Create a new account <b routerLink="/register">here</b>
+    </div>
+  </div>
+</div>
