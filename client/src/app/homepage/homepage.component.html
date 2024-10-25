@@ -80,7 +80,7 @@
     </div>
   </div>
   
-  <div *ngIf="isSolved" class="matrix-container">
+  <div *ngIf="isSolved && generated" class="matrix-container">
     <div class="matrix">
       <div *ngFor="let row of mazeData; let y = index" class="matrix-row">
         <div
@@ -108,7 +108,7 @@
   </div>
 
   <button
-    (click)="solveMaze()"
+    (click)="generateMaze()"
     [disabled]="
       !startPosition ||
       !finishPosition ||
@@ -118,8 +118,16 @@
       brickPercentage > 40
     "
   >
-    Solve
+    Generate
   </button>
+  <button
+  (click)="showsolveMaze()"
+  [disabled]="
+    !generated
+  "
+>
+  Solve
+</button>
 </div>
   
 </body>

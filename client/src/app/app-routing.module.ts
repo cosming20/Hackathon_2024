@@ -5,6 +5,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { RegisterComponent } from './register/register.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MazeDisplayComponent } from './maze-display/maze-display.component';
+import { HistoryComponent } from './history/history.component';
 
 
 
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
+  },
+  {
+    path: 'history',
+    component: HistoryComponent,
   },
   // Redirect from root path '/' to '/login'
   {

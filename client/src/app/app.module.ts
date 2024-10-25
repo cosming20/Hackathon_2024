@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { TopNavbarComponent } from './top-navbar/top-navbar.component';
 import { MazeDisplayComponent } from './maze-display/maze-display.component';
+import { HistoryComponent } from './history/history.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { MazeDisplayComponent } from './maze-display/maze-display.component';
     RegisterComponent,
     HomepageComponent,
     TopNavbarComponent,
-    MazeDisplayComponent
+    MazeDisplayComponent,
+    HistoryComponent
   ],
   imports: [
     BrowserModule,

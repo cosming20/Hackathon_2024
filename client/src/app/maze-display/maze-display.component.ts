@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
 import { ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs';
@@ -11,20 +11,13 @@ import { readSync } from 'fs';
 })
 export class MazeDisplayComponent implements OnInit {
   mazeData: number[][] = [];
-  startX: number = 0;
-  startY: number = 0;
-  finishX: number = 0;
-  finishY: number = 0;
-
+  @Input() postInput: any;
   constructor(private appService: AppService, private route: ActivatedRoute) {}
   ngOnInit(): void {
-    const mazeId = '671bdd62ac528238e94f38b3'; // Replace with dynamic ID if needed
-    this.appService.getMaze(mazeId).subscribe((response) => {
-      this.mazeData = response.maze.matrix;
-      this.startX = response.maze.start_x;
-      this.startY = response.maze.start_y;
-      this.finishX = response.maze.finish_x;
-      this.finishY = response.maze.finish_y;
-    });
+    if (this.postInput.matrixSolved != 0)
+      this.mazeData = this.postInput.matrixSolved 
+    else
+    this.mazeData = this.postInput.matrix
+    console.log(this.mazeData)
   }
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AppService } from '../app.service';
 import { first } from 'rxjs';
+import { response } from 'express';
 
 @Component({
   selector: 'app-homepage',
@@ -20,6 +21,8 @@ export class HomepageComponent {
   finishX: number = 0;
   finishY: number = 0;
   isSolved: boolean = false;
+  generated: boolean = false;
+  maze_id: string = "";
   constructor(private appService: AppService) {}
 
   createMatrix() {
@@ -56,8 +59,31 @@ export class HomepageComponent {
     this.startPosition = null;
     this.finishPosition = null;
   }
-
-  solveMaze() {
+  showsolveMaze () {
+    this.appService.solveMaze(this.maze_id)
+      .pipe(first())
+      .subscribe({
+        next: (response) => {
+          console.log('Maze created successfully!', response);
+          this.mazeData = response.maze.matrixSolved;
+          this.isSolved = true;
+          // console.log(this.mazeData)
+          this.generated = true;
+          console.log(this.mazeData)
+          // Handle the success response, e.g., display or process the solution
+        },
+        error: (errorResponse) => {
+          console.error('Error creating maze!', errorResponse);
+          // Show an alert with the error message if available, otherwise a default message
+          if (errorResponse.error && errorResponse.error.msg) {
+            alert(errorResponse.error.msg);
+          } else {
+            alert("Failed to create maze. Please try again.");
+          }
+        }
+      })
+  }
+  generateMaze() {
     if (this.startPosition && this.finishPosition) {
       const requestBody = {
         dimension_x: this.dimensionX, // Now represents rows
@@ -74,7 +100,10 @@ export class HomepageComponent {
           console.log('Maze created successfully!', response);
           this.mazeData = response.maze.matrix;
           this.isSolved = true;
-          console.log(this.mazeData)
+          // console.log(this.mazeData)
+          this.generated = true;
+          this.maze_id = response.maze._id
+          // console.log(this.maze_id)
           // Handle the success response, e.g., display or process the solution
         },
         error: (errorResponse) => {
