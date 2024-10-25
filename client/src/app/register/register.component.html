@@ -1,37 +1,31 @@
-<div class="container">
-  <div class="login-card">
-    <div>Create a new account</div>
-    <br />
+<div class="registration-container">
+  <div class="registration-card">
+    <h1>Create a New Account</h1>
     <span>
       Username:
       <input
         class="input"
         type="text"
         placeholder=""
-        data-placeholder="Enter your username"
         [(ngModel)]="username"
         required
       />
     </span>
-    <br />
     <span>
       Password:
       <input
         class="input"
         type="password"
         placeholder=""
-        data-placeholder="Enter your password"
         [(ngModel)]="password"
         required
       />
     </span>
-    <br />
-    <div *ngIf="errorMessage" class="error-message">
-      {{ errorMessage }}
-    </div>
-    <button class="sign-in-btn" (click)="registerUser()">Create</button>
+    <button class="register-btn" (click)="registerUser()" [disabled]="loading">
+      Create Account
+    </button>
     <div class="go-back">
-      <b routerLink="/login">Already have an account?</b>
+      Already have an account? <b routerLink="/login">Log in</b>
     </div>
   </div>
 </div>

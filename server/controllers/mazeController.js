@@ -3,6 +3,64 @@ const { StatusCodes } = require("http-status-codes");
 const CustomError = require("../errors");
 const { spawn } = require("child_process");
 
+const savePath = async (req, res) => {
+  const mazeId = req.params.id;
+  const maze = await Maze.findOne({ _id: mazeId });
+  if (!maze) {
+    throw new CustomError.BadRequestError(`Maze not found with id ${mazeId}`);
+  }
+  // const python = spawn("python3", ["../../scripts/app.py", start_x,
+  //   start_y,
+  //   finish_x,
+  //   finish_y,
+  //   dimension_x,
+  //   dimension_y,
+  //   bricks] );
+  const path = require("path");
+  const python = spawn("python3", [
+    path.resolve(__dirname, "../../scripts/save_path.py"),
+    maze.start_x,
+    maze.start_y,
+    maze.finish_x,
+    maze.finish_y,
+    JSON.stringify(maze.matrix),
+  ]);
+  let pathSolved = "";
+  python.stdout.on("data", (data) => {
+      pathSolved += data.toString();
+  });
+
+  python.stderr.on("data", (data) => {
+    console.error(`Error: ${data}`);
+  });
+  python.on("close", async (code) => {
+    if (code !== 0) {
+      return res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ error: "Failed to generate maze matrix" });
+    }
+
+    console.log("pulamea",pathSolved)
+    try {
+      console.log(pathSolved);
+      
+      const parsedMatrix = JSON.parse(pathSolved); // Parses `matrixSolved` into an array
+      console.log(parsedMatrix)
+      if (Array.isArray(parsedMatrix) && Array.isArray(parsedMatrix[1])) {
+        maze.pathSolved = parsedMatrix; // Access the second matrix
+        await maze.save();
+        res.status(200).json({ maze });
+      } else {
+        throw new Error("Parsed data structure is invalid");
+      }
+    } catch (error) {
+      console.log("bagamiasoulas")
+      res.status(500).json({ error: "Failed to parse matrix data" });
+    }
+  });
+}
+
+
 const solveMaze = async (req, res) => {
   const mazeId = req.params.id;
   const maze = await Maze.findOne({ _id: mazeId });
@@ -182,4 +240,5 @@ module.exports = {
   getAllMazeByCurrentUser,
   getSingleMaze,
   solveMaze,
+  savePath,
 };

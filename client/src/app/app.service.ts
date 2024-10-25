@@ -31,5 +31,10 @@ export class AppService {
   solveMaze(maze_id: string): Observable<any> {
     return this.http.post(`http://localhost:5000/api/v1/maze/solve/${maze_id}`, {}, {withCredentials: true})
   }
-  
+  savePath(maze_id: string): Observable<any> {
+    return this.http.post(`http://localhost:5000/api/v1/maze/solve/save/${maze_id}`, {}, {withCredentials: true})
+  }
+  isAuthenticated(): Observable<any> {
+    return this.http.get<{ authenticated: boolean }>('http://localhost:5000/api/v1/auth/isAuthenticated', { withCredentials: true });
+  }
 }

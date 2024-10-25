@@ -48,25 +48,28 @@
     </div>
   </div>
 
-  <!-- <div class="matrix-container" *ngIf="matrix.length">
+  <!-- <div *ngIf="!isSolved" class="matrix-container">
     <div class="matrix">
       <div *ngFor="let row of matrix; let y = index" class="matrix-row">
         <div
           *ngFor="let cell of row; let x = index"
           class="matrix-cell"
           [ngClass]="{
-            start: cell.isStart,
-            finish: cell.isFinish
+            'start': cell.isStart,
+            'finish': cell.isFinish
           }"
           (click)="setPosition(x, y)"
         ></div>
       </div>
     </div>
-  </div> -->
-
-  <div *ngIf="!isSolved" class="matrix-container">
-    <div class="matrix">
-      <div *ngFor="let row of matrix; let y = index" class="matrix-row">
+  </div>
+   -->
+   <div *ngIf="!isSolved" class="matrix-container">
+    <div class="matrix" [style.gridTemplateColumns]="'repeat(' + dimensionX + ', 1fr)'">
+      <div
+        *ngFor="let row of matrix; let y = index"
+        class="matrix-row"
+      >
         <div
           *ngFor="let cell of row; let x = index"
           class="matrix-cell"
@@ -121,7 +124,7 @@
     Generate
   </button>
   <button
-  (click)="showsolveMaze()"
+  (click) = "handleButtonClick()"
   [disabled]="
     !generated
   "

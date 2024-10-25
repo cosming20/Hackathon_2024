@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AppService } from '../app.service';
-import { first } from 'rxjs';
+import { delay, first } from 'rxjs';
 import { response } from 'express';
 
 @Component({
@@ -59,30 +59,56 @@ export class HomepageComponent {
     this.startPosition = null;
     this.finishPosition = null;
   }
-  showsolveMaze () {
-    this.appService.solveMaze(this.maze_id)
-      .pipe(first())
-      .subscribe({
-        next: (response) => {
-          console.log('Maze created successfully!', response);
-          this.mazeData = response.maze.matrixSolved;
-          this.isSolved = true;
-          // console.log(this.mazeData)
-          this.generated = true;
-          console.log(this.mazeData)
-          // Handle the success response, e.g., display or process the solution
-        },
-        error: (errorResponse) => {
-          console.error('Error creating maze!', errorResponse);
-          // Show an alert with the error message if available, otherwise a default message
-          if (errorResponse.error && errorResponse.error.msg) {
-            alert(errorResponse.error.msg);
-          } else {
-            alert("Failed to create maze. Please try again.");
+  showsolveMaze(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.appService.solveMaze(this.maze_id)
+        .pipe(first())
+        .subscribe({
+          next: (response) => {
+            console.log('Maze created successfully!', response);
+            this.mazeData = response.maze.matrixSolved;
+            this.isSolved = true;
+            this.generated = true;
+            resolve();
+          },
+          error: (errorResponse) => {
+            console.error('Error creating maze!', errorResponse);
+            alert(errorResponse.error?.msg || "Failed to create maze. Please try again.");
+            reject(errorResponse);
           }
-        }
-      })
+        });
+    });
   }
+  
+  savePathMaze(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.appService.savePath(this.maze_id)
+        .pipe(first())
+        .subscribe({
+          next: (response) => {
+            this.mazeData = response.maze.matrixSolved;
+            console.log("Path saved successfully!", response);
+            resolve();
+          },
+          error: (errorResponse) => {
+            console.error('Error saving path!', errorResponse);
+            alert(errorResponse.error?.msg || "Failed to save path. Please try again.");
+            reject(errorResponse);
+          }
+        });
+    });
+  }
+  
+
+  handleButtonClick() {
+    this.showsolveMaze().then(() => {
+      this.savePathMaze();
+    }).catch(error => {
+      console.error("Error executing functions:", error);
+    });
+  }
+  
+
   generateMaze() {
     if (this.startPosition && this.finishPosition) {
       const requestBody = {

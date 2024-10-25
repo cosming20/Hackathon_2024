@@ -1,7 +1,7 @@
 const { StatusCodes } = require("http-status-codes");
 const User = require("../models/User");
 const { BadRequestError, UnauthenticatedError } = require("../errors");
-const { attachSingleCookiesToResponse } = require("../utils/jwt");
+const { attachSingleCookiesToResponse, isTokenValid } = require("../utils/jwt");
 
 const register = async (req, res) => {
   const { username, password } = req.body;
@@ -53,8 +53,21 @@ const logout = async (req, res) => {
   });
   res.status(StatusCodes.OK).json({ msg: "user logged out!" });
 };
+const isAuthenticated = async (req, res) => {
+  const { token } = req.signedCookies;
+  if (!token) {
+    return res.status(StatusCodes.UNAUTHORIZED).json({ authenticated: false });
+  }
+  try {
+    const payload = isTokenValid(token);
+    res.status(StatusCodes.OK).json({ authenticated: true });
+  } catch (error) {
+    res.status(StatusCodes.UNAUTHORIZED).json({ authenticated: false });
+  }
+};
 module.exports = {
   register,
   login,
   logout,
+  isAuthenticated,
 };

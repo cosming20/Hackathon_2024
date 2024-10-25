@@ -1,0 +1,104 @@
+/* General container styling for the maze display components */
+.body {
+    background-image: url('/assets/images/tot.png'); /* Main background image */
+}
+.container {
+    
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+    width: 100%;
+    min-height: 2vh; /* Ensure the container covers the full viewport */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Ancient Greek', sans-serif;
+    font-size: 18px;
+    max-height: fit-content;
+}
+
+/* Maze display container */
+.maze-display-container {
+    background: rgba(255, 255, 255, 0.7); /* Slight translucency */
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8px); /* Adds a smooth blur effect */
+    margin: 20px 0;
+    width: 80%; /* Limits the size */
+}
+
+/* Maze title styling */
+.maze-display-container h2 {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Maze display grid styling */
+.app-maze-display {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); /* Adjusts the number of cells dynamically */
+    gap: 5px;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Individual maze cell styling */
+.maze-cell {
+    border: 1px solid #ccc;
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    transition: transform 0.2s ease; /* Smooth scaling effect */
+    cursor: pointer;
+}
+
+.maze-cell:hover {
+    transform: scale(1.05); /* Slightly scales up on hover */
+}
+
+/* Start, finish, brick, and path specific styles */
+.maze-cell.start {
+    background-image: url('/assets/images/start.png');
+}
+
+.maze-cell.finish {
+    background-image: url('/assets/images/finish.png');
+}
+
+.maze-cell.brick {
+    background-image: url('/assets/images/brick.png');
+}
+
+.maze-cell.path {
+    background-image: url('/assets/images/path.png');
+}
+
+/* Mobile responsive styling */
+@media screen and (max-width: 768px) {
+    .maze-cell {
+        width: 30px;
+        height: 30px; /* Adjust for smaller screens */
+    }
+}
+
+/* Button and navigation related styling */
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-family: 'Ancient Greek';
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}

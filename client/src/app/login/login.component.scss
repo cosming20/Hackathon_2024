@@ -1,38 +1,75 @@
-.container{
-    background-color: #eeeeee;
+/* Updated CSS */
+.container {
+    background-image: url('/assets/images/tot.png'); /* Add your image path here */
+    background-size: cover;
+    background-position: center;
     width: 100%;
     height: 100vh;
-
-    display:flex;
-    justify-content: center;
-}
-.login-card{
     display: flex;
-    align-self: center;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Ancient Greek', sans-serif;
+    font-size: 20px;
+}
+.login-card {
+    display: flex;
     align-items: center;
     flex-direction: column;
-    padding: 16px;
-    width: 500px;
-    height: auto;
-    background-color: white;
-    border-radius: 10px;
+    padding: 32px;
+    width: 400px;
+    background: rgba(255, 255, 255, 0.4); /* Translucent effect */
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(8px); /* Optional: subtle blur effect */
 }
-.sign-in-btn{
-    background-color:red;
-    width:100%;
-    height: 60px;
+
+h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    // font-family: sans-serif;
+}
+
+.sign-in-btn {
+    background-color: #007bff;
+    width: 100%;
+    height: 50px;
     padding: 16px 32px;
     border-radius: 8px;
     border: none;
     color: white;
-    cursor:pointer;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+    font-family: 'Ancient Greek';
+    font-size: 20px;
 }
+
+.sign-in-btn:hover {
+    background-color: #0056b3;
+}
+
 .go-back {
+    margin-top: 10px;
     color: black;
     cursor: pointer;
     font-size: 14px;
-  
-    b {
-      color: red
-    }
-  }
+    text-align: center;
+}
+
+.go-back b {
+    color: #007bff;
+    text-decoration: underline;
+}
