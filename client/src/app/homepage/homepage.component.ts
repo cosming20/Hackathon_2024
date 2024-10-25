@@ -73,7 +73,8 @@ export class HomepageComponent {
           },
           error: (errorResponse) => {
             console.error('Error creating maze!', errorResponse);
-            alert(errorResponse.error?.msg || "Failed to create maze. Please try again.");
+            // alert(errorResponse.error?.msg || "Failed to create maze. Please try again.");
+            alert("No paths found")
             reject(errorResponse);
           }
         });
@@ -92,7 +93,8 @@ export class HomepageComponent {
           },
           error: (errorResponse) => {
             console.error('Error saving path!', errorResponse);
-            alert(errorResponse.error?.msg || "Failed to save path. Please try again.");
+            // alert(errorResponse.error?.msg || "Failed to save path. Please try again.");
+            alert("nu sa putut bos")
             reject(errorResponse);
           }
         });

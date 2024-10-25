@@ -4,30 +4,35 @@
 
   <div class="input-group">
     <label for="dimension_x">Dimension X:</label>
-    <input
-      type="number"
-      id="dimension_x"
-      [(ngModel)]="dimensionX"
-      (ngModelChange)="createMatrix()"
-      min="1"
-      required
-    />
-    <div *ngIf="dimensionX < 1" class="error-message">
-      Dimension X must be at least 1.
-    </div>
+<input
+  type="number"
+  id="dimension_x"
+  [(ngModel)]="dimensionX"
+  (ngModelChange)="createMatrix()"
+  min="1"
+  max="50"
+  required
+/>
+<div *ngIf="dimensionX < 1 || dimensionX > 50" class="error-message">
+  Dimension X must be between 1 and 50.
+</div>
 
-    <label for="dimension_y">Dimension Y:</label>
-    <input
-      type="number"
-      id="dimension_y"
-      [(ngModel)]="dimensionY"
-      (ngModelChange)="createMatrix()"
-      min="1"
-      required
-    />
-    <div *ngIf="dimensionY < 1" class="error-message">
-      Dimension Y must be at least 1.
-    </div>
+<label for="dimension_y">Dimension Y:</label>
+<input
+  type="number"
+  id="dimension_y"
+  [(ngModel)]="dimensionY"
+  (ngModelChange)="createMatrix()"
+  min="1"
+  max="50"
+  required
+/>
+<div *ngIf="dimensionY < 1 || dimensionY > 50" class="error-message">
+  Dimension Y must be between 1 and 50.
+</div>
+    <!-- <div *ngIf="dimensionY > 100" class="error-message">
+      Dimension Y must be at max 100.
+    </div> -->
   </div>
 
   <div class="input-group">
@@ -118,7 +123,9 @@
       dimensionX < 1 ||
       dimensionY < 1 ||
       brickPercentage < 0 ||
-      brickPercentage > 40
+      brickPercentage > 40 ||
+      dimensionX > 100 ||
+      dimensionY > 100 
     "
   >
     Generate
