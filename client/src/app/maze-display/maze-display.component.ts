@@ -18,15 +18,13 @@ export class MazeDisplayComponent implements OnInit {
 
   constructor(private appService: AppService, private route: ActivatedRoute) {}
   ngOnInit(): void {
-    const mazeId = '671bab6c92affba0b10fcfa6'; // Replace with dynamic ID if needed
+    const mazeId = '671bbfa3d9c0715545280e59'; // Replace with dynamic ID if needed
     this.appService.getMaze(mazeId).subscribe((response) => {
-      console.log(response);
       this.mazeData = response.maze.matrix;
       this.startX = response.maze.start_x;
       this.startY = response.maze.start_y;
       this.finishX = response.maze.finish_x;
       this.finishY = response.maze.finish_y;
-      console.log(this.mazeData, this.startX);
     });
   }
 }
