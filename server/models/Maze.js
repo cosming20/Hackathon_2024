@@ -47,6 +47,10 @@ const mazeSchema = new mongoose.Schema(
       type: [[Number]],
       default: [[0]],
     },
+    matrixSolved: {
+      type: [[Number]],
+      default: [[0]],
+    },
   },
   { timestamps: true }
 );

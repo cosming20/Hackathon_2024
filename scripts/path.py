@@ -1,8 +1,9 @@
 from collections import deque   
+import sys
+import json
 
 def find_shortest_path(lab, start, stop):
     queue = deque([(start[0], start[1], 0)])
-
     visited = set()
     visited.add((start[0], start[1]))
 
@@ -37,4 +38,15 @@ def find_shortest_path(lab, start, stop):
                     visited.add((nx, ny))
                     previous_cell[(nx,ny)] = (x, y)
 
-    return lab
+    return None
+
+
+if __name__ == "__main__":
+    x_start = int(sys.argv[1])
+    y_start = int(sys.argv[2])
+    x_finish = int(sys.argv[3])
+    y_finish = int(sys.argv[4])
+    matrix = json.loads(sys.argv[5])  # Parse the JSON string
+    # print(matrix)
+    result = find_shortest_path(matrix, (x_start, y_start), (x_finish, y_finish))
+    print(json.dumps(result))  # Output the result as JSON

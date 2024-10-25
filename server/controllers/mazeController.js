@@ -3,6 +3,63 @@ const { StatusCodes } = require("http-status-codes");
 const CustomError = require("../errors");
 const { spawn } = require("child_process");
 
+const solveMaze = async (req, res) => {
+  const mazeId = req.params.id;
+  const maze = await Maze.findOne({ _id: mazeId });
+  if (!maze) {
+    throw new CustomError.BadRequestError(`Maze not found with id ${mazeId}`);
+  }
+  // const python = spawn("python3", ["../../scripts/app.py", start_x,
+  //   start_y,
+  //   finish_x,
+  //   finish_y,
+  //   dimension_x,
+  //   dimension_y,
+  //   bricks] );
+  const path = require("path");
+  // console.log(maze.matrix);
+  const python = spawn("python3", [
+    path.resolve(__dirname, "../../scripts/path.py"),
+    maze.start_x,
+    maze.start_y,
+    maze.finish_x,
+    maze.finish_y,
+    JSON.stringify(maze.matrix),
+  ]);
+  let matrixSolved = "";
+  python.stdout.on("data", (data) => {
+    matrixSolved += data.toString();
+  });
+
+  python.stderr.on("data", (data) => {
+    console.error(`Error: ${data}`);
+  });
+  python.on("close", async (code) => {
+    if (code !== 0) {
+      return res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ error: "Failed to generate maze matrix" });
+    }
+    try {
+      // console.log(matrixSolved);
+      const parsedMatrix = JSON.parse(matrixSolved); // Parses `matrixSolved` into an array
+      console.log(typeof(parsedMatrix))
+      if (Array.isArray(parsedMatrix) && Array.isArray(parsedMatrix[1])) {
+        maze.matrixSolved = parsedMatrix; // Access the second matrix
+        await maze.save();
+        res.status(200).json({ maze });
+      } else {
+        throw new Error("Parsed data structure is invalid");
+      }
+    } catch (error) {
+      res.status(500).json({ error: "Failed to parse matrix data" });
+    }
+  });
+  // add here mazeObject.matrix
+  // maze = await Maze.create(mazeObject);
+  // res.status(StatusCodes.CREATED).json({ maze });
+};
+
 const createMaze = async (req, res) => {
   const {
     start_x,
@@ -44,7 +101,7 @@ const createMaze = async (req, res) => {
   //   bricks] );
   const path = require("path");
   const python = spawn("python3", [
-    path.resolve(__dirname, "../../scripts/app.py"),
+    path.resolve(__dirname, "../../scripts/generate.py"),
     start_x,
     start_y,
     finish_x,
@@ -57,7 +114,7 @@ const createMaze = async (req, res) => {
   python.stdout.on("data", (data) => {
     matrix += data.toString();
   });
-
+  // console.log(matrix)
   python.stderr.on("data", (data) => {
     console.error(`Error: ${data}`);
   });
@@ -67,7 +124,7 @@ const createMaze = async (req, res) => {
         .status(StatusCodes.INTERNAL_SERVER_ERROR)
         .json({ error: "Failed to generate maze matrix" });
     }
-    console.log(matrix);
+    // console.log(matrix);
     try {
       const parsedMatrix = JSON.parse(matrix);
       const mazeObject = {
@@ -93,6 +150,7 @@ const createMaze = async (req, res) => {
   // maze = await Maze.create(mazeObject);
   // res.status(StatusCodes.CREATED).json({ maze });
 };
+
 const getSingleMaze = async (req, res) => {
   const mazeId = req.params.id;
   const maze = await Maze.findOne({ _id: mazeId });
@@ -123,4 +181,5 @@ module.exports = {
   getAllMaze,
   getAllMazeByCurrentUser,
   getSingleMaze,
+  solveMaze,
 };

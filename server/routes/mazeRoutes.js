@@ -7,8 +7,10 @@ const {
   getSingleMaze,
   getAllMazeByCurrentUser,
   getAllMaze,
+  solveMaze,
 } = require("../controllers/mazeController");
-router.post("/", authenticateUser, createMaze);
+router.post("/generate", authenticateUser, createMaze);
+router.post("/solve/:id", authenticateUser, solveMaze);
 router.get("/showMe", authenticateUser, getAllMazeByCurrentUser);
 router.get("/:id", authenticateUser, getSingleMaze);
 router.get("/", authenticateUser, getAllMaze);

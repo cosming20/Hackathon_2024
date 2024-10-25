@@ -1,4 +1,6 @@
 import numpy as np
+import json
+import sys
 
 def generate_lab(x_start, y_start, x_finish, y_finish, x, y, brick):
     
@@ -21,4 +23,13 @@ def generate_lab(x_start, y_start, x_finish, y_finish, x, y, brick):
             bricks_num -= 1
 
     return lab.tolist()
+
+if __name__ == "__main__":
+    # Unpack all arguments passed from Node.js
+    x_start, y_start, x_finish, y_finish, x, y, bricks = map(int, sys.argv[1:])
+    # Generate the labyrinth with provided parameters
+    lab = generate_lab(x_start, y_start, x_finish, y_finish, x, y, bricks)
+    # print(sht)
+    # print(json.dumps(lab))
+    print(json.dumps(lab))
     
