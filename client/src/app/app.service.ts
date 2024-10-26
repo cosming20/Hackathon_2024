@@ -15,8 +15,8 @@ export class AppService {
   logout(): Observable<any> {
     return this.http.get('http://localhost:5000/api/v1/auth/logout', { withCredentials: true });
   }
-  getallMazes(): Observable<any> {
-    return this.http.get('http://localhost:5000/api/v1/maze/showMe', { withCredentials: true });
+  getallMazes(page: number = 1, limit: number = 3): Observable<any> {
+    return this.http.get(`http://localhost:5000/api/v1/maze/showMe?page=${page}&limit=${limit}`, { withCredentials: true });
   }
   register(username: string, password: string): Observable<any> {
     const body = { username, password };

@@ -1,7 +1,6 @@
 const Maze = require("../models/Maze");
 const { StatusCodes } = require("http-status-codes");
 const CustomError = require("../errors");
-const { spawn } = require("child_process");
 
 const savePathh = async (lab, start, stop) => {
   const queue = [[start[0], start[1], 0]];
@@ -148,6 +147,7 @@ const savePath = async (req, res) => {
     
     if (Array.isArray(parsedMatrix) && Array.isArray(parsedMatrix[1])) {
       maze.pathSolved = parsedMatrix; // Access the second matrix
+      maze.isSolved = true;
       await maze.save();
       res.status(200).json({ maze });
     } else {
@@ -165,6 +165,9 @@ const solveMaze = async (req, res) => {
   if (!maze) {
     throw new CustomError.BadRequestError(`Maze not found with id ${mazeId}`);
   }
+  if(maze.isSolved){
+    throw new CustomError.BadRequestError(`Maze with id ${mazeId} is already solved`);
+  }
   const pathSolved = await findShortestPath(maze.matrix,[maze.start_x,maze.start_y],[maze.finish_x,maze.finish_y])
   // console.log(pathSolved)
   try {
@@ -172,6 +175,7 @@ const solveMaze = async (req, res) => {
     const parsedMatrix = pathSolved; // Parses `matrixSolved` into an array
     if (Array.isArray(parsedMatrix) && Array.isArray(parsedMatrix[1])) {
       maze.matrixSolved = parsedMatrix; // Access the second matrix
+      maze.isSolved = true;
       await maze.save();
       res.status(200).json({ maze });
     } else {
@@ -245,15 +249,34 @@ const getSingleMaze = async (req, res) => {
   res.status(StatusCodes.OK).json({ maze });
 };
 const getAllMazeByCurrentUser = async (req, res) => {
-  console.log(req.user.id);
-  const mazes = await Maze.find({ user: req.user.id });
-  if (!mazes) {
+  const { page = 1, limit = 3 } = req.query; // Default to page 1, 10 items per page
+  const userId = req.user.id;
+
+  // Calculate the number of documents to skip based on the current page
+  const skip = (page - 1) * limit;
+
+  const mazes = await Maze.find({ user: userId })
+    .limit(Number(limit))
+    .skip(Number(skip));
+
+  if (!mazes || mazes.length === 0) {
     throw new CustomError.NotFoundError(
       `No mazes found for user ${req.user.username}`
     );
   }
-  res.status(StatusCodes.OK).json({ mazes, count: mazes.length });
+
+  const totalMazes = await Maze.countDocuments({ user: userId });
+  const totalPages = Math.ceil(totalMazes / limit);
+
+  res.status(StatusCodes.OK).json({
+    mazes,
+    count: mazes.length,
+    totalMazes,
+    totalPages,
+    currentPage: parseInt(page),
+  });
 };
+
 const getAllMaze = async (req, res) => {
   const mazes = await Maze.find();
   if (!mazes) {

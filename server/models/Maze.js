@@ -1,4 +1,4 @@
-const { required } = require("joi");
+const { required, boolean } = require("joi");
 const mongoose = require("mongoose");
 
 const mazeSchema = new mongoose.Schema(
@@ -55,6 +55,10 @@ const mazeSchema = new mongoose.Schema(
       type: [[Number]],
       default: [[0]],
     },
+    isSolved: {
+      type: Boolean,
+      default: false
+    }
   },
   { timestamps: true }
 );

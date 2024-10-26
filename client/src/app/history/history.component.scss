@@ -1,101 +1,139 @@
-/* General container styling for the maze display components */
 body {
     background-size: auto;
-    background-image: url('/assets/images/history.png'); /* Main background image */
-}
-.container {
-    
-    // background-size: cover;
-    // background-position: center;
-    // width: 100px;
-    // padding: 20px;
+    background-image: url('/assets/images/history.png'); // Main background image
+    font-family: 'Ancient Greek', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center; // Centers content horizontally
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+  }
+  
+  .container {
+    margin-top:130px;
     width: 100%;
     max-height: 560px;
     margin-bottom: 100px;
     max-width: 510px;
-    margin-left: 36.3%;
     overflow: auto;
-    min-height: 2vh; /* Ensure the container covers the full viewport */
+    min-height: 2vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 10px 10px 10px 10px #333;
+  }
+  
+  /* Pagination container styling */
+  .pagination {
+    position: absolute;
+    top: 120px; // Adjust as needed
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 30px;
+    max-width: 560px;
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: 'Ancient Greek', sans-serif;
-    // font-size: 18px;
-    display: flex;
-    // flex-direction: column;
-    // width: max-content;
-    // height: ;
-    // max-height: fit-content;
-    box-shadow: 10px 10px 10px 10px#333;
-}
-
-/* Maze display container */
-.maze-display-container {
-    background: rgba(255, 255, 255, 0.7); /* Slight translucency */
+    font-size: 20px;
+  }
+  
+  /* Pagination button styling - text only */
+  .pagination-button {
+    background: transparent; // Remove background color
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin: 0 5px;
+    font-family: 'Ancient Greek', sans-serif;
+    font-size: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: font-size 0.3s ease; // Smooth transition for font-size on hover
+  
+    &:hover {
+      font-size: 35px;
+    }
+  
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+  
+  /* Page information text styling */
+  .page-info {
+    font-size: 40px;
+    color: white;
+    margin: 0 10px;
+  }
+  
+  /* Maze display container */
+  .maze-display-container {
+    background: rgba(255, 255, 255, 0.7); // Slight translucency
     border-radius: 15px;
     padding: 20px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(8px); /* Adds a smooth blur effect */
-    // margin: 20px 0;
-    // width: 80%; /* Limits the size */
-}
-
-/* Maze title styling */
-.maze-display-container h2 {
+    backdrop-filter: blur(8px); // Adds a smooth blur effect
+  }
+  
+  /* Maze title styling */
+  .maze-display-container h2 {
     text-align: center;
     font-size: 24px;
     color: #333;
     margin-bottom: 10px;
-}
-
-/* Maze display grid styling */
-.app-maze-display {
+  }
+  
+  /* Maze display grid styling */
+  .app-maze-display {
     display: grid;
-    // grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); /* Adjusts the number of cells dynamically */
     gap: 5px;
-    // width: 100%;
-    // max-width: 1000px;
     margin: 0 auto;
-}
-
-/* Individual maze cell styling */
-.maze-cell {
+  }
+  
+  /* Individual maze cell styling */
+  .maze-cell {
     border: 1px solid #ccc;
     width: 30px;
     height: 30px;
-    transition: transform 0.2s ease; /* Smooth scaling effect */
+    transition: transform 0.2s ease;
     cursor: pointer;
     background-size: cover;
-}
-
-.maze-cell:hover {
-    transform: scale(1.05); /* Slightly scales up on hover */
-}
-
-/* Start, finish, brick, and path specific styles */
-.maze-cell.start {
-    background-image: url('/assets/images/start.png');
-}
-
-.maze-cell.finish {
-    background-image: url('/assets/images/finish.png');
-}
-
-.maze-cell.brick {
-    background-image: url('/assets/images/brick.png');
-}
-
-.maze-cell.path {
-    background-image: url('/assets/images/path.png');
-}
-
-/* Mobile responsive styling */
-@media screen and (max-width: 768px) {
-    .maze-cell {
-        width: 30px;
-        height: 30px; /* Adjust for smaller screens */
+  
+    &:hover {
+      transform: scale(1.05); // Slightly scales up on hover
     }
-}
-
-/* Button and navigation related styling */
+  }
+  
+  /* Start, finish, brick, and path specific styles */
+  .maze-cell.start {
+    background-image: url('/assets/images/start.png');
+  }
+  
+  .maze-cell.finish {
+    background-image: url('/assets/images/finish.png');
+  }
+  
+  .maze-cell.brick {
+    background-image: url('/assets/images/brick.png');
+  }
+  
+  .maze-cell.path {
+    background-image: url('/assets/images/path.png');
+  }
+  
+  /* Mobile responsive styling */
+  @media screen and (max-width: 768px) {
+    .container {
+      width: 90%;
+      max-width: 100%;
+    }
+  
+    .maze-cell {
+      width: 30px;
+      height: 30px; // Adjust for smaller screens
+    }
+  }
   

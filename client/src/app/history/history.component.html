@@ -1,9 +1,17 @@
 <body>
- 
-<ng-container *ngFor="let maze of mazes ">
-    <div class="container">
-    <app-maze-display [postInput]="maze" ></app-maze-display>
-</div>
-</ng-container>
-   
+    <div class="pagination">
+        <button (click)="previousPage()" [disabled]="currentPage === 1" class="pagination-button">
+          &#8592; Previous
+        </button>
+        <span class="page-info">Page {{ currentPage }} of {{ totalPages }}</span>
+        <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="pagination-button">
+          Next &#8594;
+        </button>
+      </div>
+      
+    <ng-container *ngFor="let maze of mazes">
+      <div class="container">
+        <app-maze-display [postInput]="maze"></app-maze-display>
+      </div>
+    </ng-container>
 </body>

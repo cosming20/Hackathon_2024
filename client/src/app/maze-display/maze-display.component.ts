@@ -1,8 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
 import { ActivatedRoute } from '@angular/router';
-import { first } from 'rxjs';
-import { readSync } from 'fs';
 
 @Component({
   selector: 'app-maze-display',
@@ -11,13 +9,16 @@ import { readSync } from 'fs';
 })
 export class MazeDisplayComponent implements OnInit {
   mazeData: number[][] = [];
+  createdAt: string | undefined; // Variable to store the creation date
   @Input() postInput: any;
+
   constructor(private appService: AppService, private route: ActivatedRoute) {}
+
   ngOnInit(): void {
-    if (this.postInput.matrixSolved != 0)
-      this.mazeData = this.postInput.matrixSolved 
-    else
-    this.mazeData = this.postInput.matrix
-    console.log(this.mazeData)
+    // Set maze data based on whether the maze is solved
+    this.mazeData = this.postInput.matrixSolved != 0 ? this.postInput.matrixSolved : this.postInput.matrix;
+    this.createdAt = this.postInput.createdAt;
+    
+    console.log(this.createdAt);
   }
 }
