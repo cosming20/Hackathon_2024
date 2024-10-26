@@ -9,13 +9,6 @@ const savePath = async (req, res) => {
   if (!maze) {
     throw new CustomError.BadRequestError(`Maze not found with id ${mazeId}`);
   }
-  // const python = spawn("python3", ["../../scripts/app.py", start_x,
-  //   start_y,
-  //   finish_x,
-  //   finish_y,
-  //   dimension_x,
-  //   dimension_y,
-  //   bricks] );
   const path = require("path");
   const python = spawn("python3", [
     path.resolve(__dirname, "../../scripts/save_path.py"),
