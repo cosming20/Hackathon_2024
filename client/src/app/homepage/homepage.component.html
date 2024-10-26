@@ -1,6 +1,6 @@
 <body>
 <div class="matrix-form">
-  <h2>Create a New Matrix</h2>
+  <h2 class="input-group">Create a New Matrix</h2>
 
   <div class="input-group">
     <label for="dimension_x">Dimension X:</label>
@@ -13,8 +13,8 @@
   max="50"
   required
 />
-<div *ngIf="dimensionX < 1 || dimensionX > 50" class="error-message">
-  Dimension X must be between 1 and 50.
+<div *ngIf="dimensionX < 1 " class="error-message">
+  Dimension X must be at least 1 .
 </div>
 
 <label for="dimension_y">Dimension Y:</label>
@@ -27,12 +27,9 @@
   max="50"
   required
 />
-<div *ngIf="dimensionY < 1 || dimensionY > 50" class="error-message">
-  Dimension Y must be between 1 and 50.
+<div *ngIf="dimensionY < 1 " class="error-message">
+  Dimension Y must be at least 1.
 </div>
-    <!-- <div *ngIf="dimensionY > 100" class="error-message">
-      Dimension Y must be at max 100.
-    </div> -->
   </div>
 
   <div class="input-group">
@@ -53,22 +50,6 @@
     </div>
   </div>
 
-  <!-- <div *ngIf="!isSolved" class="matrix-container">
-    <div class="matrix">
-      <div *ngFor="let row of matrix; let y = index" class="matrix-row">
-        <div
-          *ngFor="let cell of row; let x = index"
-          class="matrix-cell"
-          [ngClass]="{
-            'start': cell.isStart,
-            'finish': cell.isFinish
-          }"
-          (click)="setPosition(x, y)"
-        ></div>
-      </div>
-    </div>
-  </div>
-   -->
    <div *ngIf="!isSolved" class="matrix-container">
     <div class="matrix" [style.gridTemplateColumns]="'repeat(' + dimensionX + ', 1fr)'">
       <div
@@ -123,9 +104,7 @@
       dimensionX < 1 ||
       dimensionY < 1 ||
       brickPercentage < 0 ||
-      brickPercentage > 40 ||
-      dimensionX > 100 ||
-      dimensionY > 100 
+      brickPercentage > 40 
     "
   >
     Generate
