@@ -1,8 +1,8 @@
 body{
-  background-image: url('/assets/images/dashboard.png');
+  background-image: url('/assets/images/history.png');
   min-height: 95vh;
   font-family: 'Ancient Greek';
-  font-size: 2rem;
+  font-size: 2rem ;
 }
 .matrix-form {
     
@@ -12,7 +12,7 @@ body{
     border: 1px solid #ccc;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    background-image: url('/assets/images/dashboard.png');
+    background-image: url('/assets/images/history.png');
     // background: rgba(255, 255, 255, 0.4); /* Translucent effect */
   
     h2 {
@@ -21,7 +21,7 @@ body{
     }
   
     .input-group {
-      background: rgba(255, 255, 255, 0.4); /* Translucent effect */
+      background: rgb(245, 222, 179, 0.6); /* Translucent effect */
       display: flex;
       flex-direction: column;
       align-items: center; /* Centers inputs horizontally */
@@ -105,7 +105,7 @@ body{
     .info {
       margin-top: 1rem;
       text-align: center;
-      font-size: 1rem;
+      font-size: 2rem;
     }
   
     button {

@@ -94,7 +94,7 @@ export class HomepageComponent {
           error: (errorResponse) => {
             console.error('Error saving path!', errorResponse);
             // alert(errorResponse.error?.msg || "Failed to save path. Please try again.");
-            alert("nu sa putut bos")
+            alert("It doesn't work")
             reject(errorResponse);
           }
         });

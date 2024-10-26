@@ -3,7 +3,7 @@
 <header>
   <div class="logo" [routerLink]="['/homepage']">Homepage</div>
   <div class="profile">
-    <div>Hello, {{ username }}</div>
+    <div class = "hellotext">Hello, {{ username }}</div>
     <button class="history-button" [routerLink]="['/history']">History</button>
     <button class="logout-button" (click)="logout()">Logout</button>
   </div>

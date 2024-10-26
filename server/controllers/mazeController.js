@@ -40,7 +40,6 @@ const savePath = async (req, res) => {
         .json({ error: "Failed to generate maze matrix" });
     }
 
-    console.log("pulamea",pathSolved)
     try {
       console.log(pathSolved);
       
@@ -54,7 +53,6 @@ const savePath = async (req, res) => {
         throw new Error("Parsed data structure is invalid");
       }
     } catch (error) {
-      console.log("bagamiasoulas")
       res.status(500).json({ error: "Failed to parse matrix data" });
     }
   });

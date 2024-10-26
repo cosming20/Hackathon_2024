@@ -14,25 +14,36 @@ header {
     background-size: 1000px, 2000px;
     background-image: url('/assets/images/navbar.png');
     // box-shadow: 10px 10px;
-    // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 60px 200px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.3), 0 80px 250px 0 rgba(0, 0, 0, 0.25);
     text-align: center;
     // border-radius: 50%;
     // box-shadow: 10px 40px 80px rgba(20, 8, 8, 0.2);
     padding: 15px 20px;
-    margin-bottom: 10px;
+    // margin-bottom: 10px;
     font-family: 'Ancient Greek';
-    border-bottom: 10px black;
+    // border-bottom: 10px black;
     font-size: 2.4rem;
     color: black;
     
   
     .logo {
-      margin-left:30px;
-      font-size: 1.5rem;
+      margin-left:140px;
+      font-size: 2.4rem;
       font-weight: bold;
+      color: wheat;
+      text-shadow: 2px 2px 4px #000000;
       cursor: pointer;
     }
   
+    .hellotext {
+      margin-right:80px;
+      font-size: 2.4rem;
+      font-weight: bold;
+      color: wheat;
+      text-shadow: 2px 2px 4px #000000;
+      cursor: pointer;
+    }
+
     .search-input {
       width: 300px;
       padding: 0.5rem;
@@ -74,7 +85,7 @@ header {
         cursor: pointer;
         transition: background-color 0.2s;
         font-family: 'Ancient Greek';
-        font-size: 2.4rem;
+        font-size: 1.7rem;
         color: black;
         background: rgba(243, 1, 1, 0.6); /* Translucent effect */
         margin-bottom: 0.4rem;
@@ -84,6 +95,7 @@ header {
       }
       .history-button {
         padding: 0.5rem 1rem;
+        margin-right: 60px;
         background-color: green;
         color: white;
         border: none;
@@ -91,9 +103,9 @@ header {
         cursor: pointer;
         transition: background-color 0.2s;
         font-family: 'Ancient Greek';
-        font-size: 2.4rem;
+        font-size: 1.7rem;
         color: black;
-        background: rgba(1, 243, 66, 0.6); /* Translucent effect */
+        background: rgba(219, 221, 220, 0.6); /* Translucent effect */
         margin-bottom: 0.4rem;
         // &:hover {
         //   background-color: rgba(235, 50, 50, 0.49)

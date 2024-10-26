@@ -1,35 +1,55 @@
 .maze-table {
-    border-collapse: collapse;
-    margin: 10px;
-  }
+  border-collapse: collapse;
+  // margin: 20px auto;
+  margin-top: 20px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  width: 500px;
+  height: 500px;
   
-  .maze-table td {
-    width: 20px;
-    height: 20px;
-    border: 1px solid #ccc;
-    background-image: url('/assets/images/cell.png');
-  }
-  
-  .maze-table .start {
-    background-image: url('/assets/images/start.png');
-    // background-color: green;
-    background-size: cover;
-  }
-  
-  .maze-table .finish {
-    background-image: url('/assets/images/finish.png');
-    // background-color: red;
-    background-size: cover;
-  }
-  
-  .maze-table .brick {
-    background-image: url('/assets/images/brick.png');
-    background-color: #333;
-    background-size: cover;
-  }
-  .maze-table .path {
-    background-image: url('/assets/images/path.png');
-    // background-color: aqua;
-    background-size: cover;
-  }
-  
+}
+
+.maze-table td {
+  width: 30px; /* Larger for better visibility */
+  height: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.2s;
+  background-image: url('/assets/images/cell.png');
+  flex-wrap: wrap;
+  overflow: auto;
+  flex: 0 0 auto;
+  min-width: 33px;
+  min-height: 33px;  
+}
+
+.maze-table td:hover {
+  transform: scale(1.1); /* Subtle zoom on hover for interactivity */
+  cursor: pointer;
+}
+
+.maze-table .start {
+  background-image: url('/assets/images/start.png');
+  border: 2px solid #4CAF50; /* Green border to signify start point */
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.6); /* Green glow */
+}
+
+.maze-table .finish {
+  background-image: url('/assets/images/finish.png');
+  border: 2px solid #F44336; /* Red border to signify finish point */
+  box-shadow: 0 0 8px rgba(244, 67, 54, 0.6); /* Red glow */
+}
+
+.maze-table .brick {
+  background-image: url('/assets/images/brick.png');
+  background-color: #4a4a4a;
+  opacity: 0.9;
+  border: 2px solid #333;
+}
+
+.maze-table .path {
+  background-image: url('/assets/images/path.png');
+  background-color: #b0e0e6;
+  opacity: 0.7;
+  border: 1px solid #87CEEB; /* Light blue for path clarity */
+}
